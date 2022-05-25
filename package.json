@@ -1,0 +1,36 @@
+{
+  "name": "safepay-engage2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akshdeep792/SafePay-Engage2022.git"
+  },
+  "author": "Akshdeep Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Akshdeep792/SafePay-Engage2022/issues"
+  },
+  "homepage": "https://github.com/Akshdeep792/SafePay-Engage2022#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "http-status-codes": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "validator": "^13.7.0"
+  }
+}
