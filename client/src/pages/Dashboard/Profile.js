@@ -6,6 +6,7 @@ import Wrapper from '../../assets/wrappers/Profile'
 
 const Profile = () => {
   const { user, showAlert, updateUser, isLoading } = useAppContext()
+  // getting data from user logged in
   const [name, setName] = useState(user?.name)
   const [email, setEmail] = useState(user?.email)
   const [lastName, setLastName] = useState(user?.lastName)
@@ -13,6 +14,7 @@ const Profile = () => {
   const [number, setNumber] = useState(user?.number)
 
 
+  // updating user credentials
   const handleSubmit = (e) => {
     e.preventDefault()
 

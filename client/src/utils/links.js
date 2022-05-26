@@ -1,9 +1,10 @@
+// importing icons from react icons
 import { IoBarChartSharp } from 'react-icons/io5'
 import {  MdTagFaces} from 'react-icons/md'
 import { FaHistory } from 'react-icons/fa'
 import { ImProfile } from 'react-icons/im'
 
-
+// these are navbar links that help us to identify and reach diffrent pages
 const links = [
   {
     id: 1,

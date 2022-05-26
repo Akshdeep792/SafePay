@@ -3,6 +3,7 @@ import Transaction from "../models/Transaction.js"
 import  { StatusCodes } from 'http-status-codes'
 import {BadRequestError, UnAuthenticatedError} from '../errors/index.js'
 
+// saving transaction history in database
 const transaction = async(req,res) => {
     
     const {payto, accountNo, upiId, amount, paymentStatus, paymentFace} = req.body;
@@ -15,7 +16,7 @@ const transaction = async(req,res) => {
     res.status(StatusCodes.CREATED).json({transaction})
 }
 
-//return all the transactions in database
+//return all the transactions done in database
 const history = async(req,res) => {
     const queryObject = {
         createdBy : req.user.userId,

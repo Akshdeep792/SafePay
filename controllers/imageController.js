@@ -3,7 +3,6 @@
 import { StatusCodes } from 'http-status-codes'
 import { BadRequestError, UnAuthenticatedError } from '../errors/index.js'
 import UserImage from '../models/UserImage.js';
-import { fileSizeFormatter } from '../utils/fileSizeformatter.js';
 import { cloudinary } from '../utils/cloudinary.js';
 
 const ImageUpload = async (req, res) => {
@@ -13,16 +12,19 @@ const ImageUpload = async (req, res) => {
         throw new BadRequestError('No User Found!')
     }
     const fileStr = req.body.data
+
+    //saving image to database 
     const file = new UserImage({
         image : fileStr,
         createdBy: req.user.userId
     });
     await file.save();
-   
+
+   // uploading it on cloudinary 
     const uploadedResponse = await cloudinary.uploader.upload(fileStr, {
         upload_preset : 'engage2022',
     }, {
-        public_id : req.user.userId,
+        public_id : req.user.userId, //saving image with userId so that we can get it for specific user
     })
     console.log(uploadedResponse)
     res.status(StatusCodes.CREATED).json({uploadedResponse})
@@ -31,11 +33,11 @@ const ImageUpload = async (req, res) => {
 
 const getImages = async (req, res) => {
 
+   // getting image from cloudinary for showing it on frontend and doing photo recognition
+    const resource = await cloudinary.v2.search.expression(`public_id=${req.user.userId}`).execute() // expression here will do query searc for public id with given value 
    
-    const resource = await cloudinary.v2.search.expression(`public_id=${req.user.userId}`).execute()
-    console.log(resource)
     const publicId = resource.resources[0].public_id;
-    console.log(publicId)
+   
     res.status(StatusCodes.OK).json({resource, publicId})
 }
 

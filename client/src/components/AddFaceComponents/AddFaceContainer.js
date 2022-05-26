@@ -3,24 +3,25 @@ import { Alert } from '../UI'
 import Wrapper from '../../assets/wrappers/AddFace'
 import { useAppContext } from '../../context/appContext'
 
+// this component allow us to add photo
 const AddFaceContainer = () => {
     const { showAlert, isLoading, displayAlert , addFace} = useAppContext();
-    const [singleFile, setSingleFile] = useState('');
+    const [singleFile, setSingleFile] = useState(''); // setting value of image uploaded from local computer
     const fileHandler = (e) =>{
         setSingleFile(e.target.files[0])
     }
+    // sending request for saving image
     const handleSubmit = (e) => {
         e.preventDefault();
         if( singleFile === ''){
-            displayAlert();
+            displayAlert('Please Add File');
             return ;
         }
-        // const formData = new FormData();
-        // formData.append('file', singleFile);
+    
         const reader = new FileReader();
-        reader.readAsDataURL(singleFile)
+        reader.readAsDataURL(singleFile) // read content of the file
         reader.onloadend= () =>{
-            addFace(reader.result);
+            addFace(reader.result); // calll the function present in appContext.js 
         }
         setSingleFile('');
     }
@@ -29,7 +30,7 @@ const AddFaceContainer = () => {
         <form className='form'>
             <h4>Add Face</h4>
             {showAlert && <Alert />}
-            {/* search position */}
+            
             <div className='form-center'>
                
                 <div className='form-row'>

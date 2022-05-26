@@ -3,6 +3,8 @@ import { useAppContext } from "../context/appContext"
 import failure from '../assets/images/decline.jpg'
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+
+// if face is not recognized than this component will render 
 const Failure = () => {
      const navigate = useNavigate();
     const {clearValues, logoutUser} = useAppContext();

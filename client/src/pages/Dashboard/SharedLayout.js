@@ -1,4 +1,4 @@
-//common layout design for dashboard
+//common layout design for dashboard pages
 
 import { Outlet } from "react-router-dom"
 import Wrapper from "../../assets/wrappers/SharedLayout"
@@ -7,6 +7,7 @@ import {SmallSidebar, BigSidebar} from '../../components/UI/index'
 const SharedLayout = () => {
     return <Wrapper>
         <main className='dashboard'>
+            {/* sidebar components for responsivness */}
             <SmallSidebar />
             <BigSidebar />
             <div>

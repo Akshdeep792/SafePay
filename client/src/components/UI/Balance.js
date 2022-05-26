@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Wrapper from "../../assets/wrappers/Balance"
 
+// show balance in user's account. It is not dynamic for now
 const Balance = () => {
     const [toggleBtn, setToggleBtn] = useState(false)
     const clickHandler = () => {

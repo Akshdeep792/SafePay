@@ -1,4 +1,4 @@
-//This component Give alert if something happens in web APP
+//This component Give alert if some error done by user happens in web APP
 import { useAppContext } from "../../context/appContext"
 
 const Alert = () => {

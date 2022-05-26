@@ -2,6 +2,7 @@ import { useAppContext} from "../context/appContext"
 import { useNavigate } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
 
+// private routes
 const ProtectedRoutes = ({children}) => {
     let navigate = useNavigate();
     const {user} = useAppContext();

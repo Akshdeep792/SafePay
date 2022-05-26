@@ -5,6 +5,7 @@ const Status = () => {
 
     return (
         <>
+        {/* payment status tell us weather face is verified or not */}
         {paymentStatus ? <Success /> : <Failure />}
         </>
     )

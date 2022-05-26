@@ -1,16 +1,10 @@
 import express from 'express'
 const app = express()
-import path from 'path'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv' // for env varialbes
 dotenv.config();
 import 'express-async-errors'
 import morgan from 'morgan'
-import {fileURLToPath} from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-
-
-const __dirname = path.dirname(__filename);
 
 //connecting to database
 import connectDB from './db/connect-db.js';
@@ -31,12 +25,13 @@ if(process.env.NODE_ENV !== 'production'){
 
 app.use(express.json({limit : '50mb'}))
 app.use(express.urlencoded({limit : '50mb', extended : true}))
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
 
 app.get('/', (req, res) => {
   res.send('Welcome!')
 })
 
+//routes
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/trans', auth, transactionRouter)
 app.use('/api/v1', auth, imageUploadRouter)
@@ -48,6 +43,8 @@ app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT || 4000
 
+
+//starting server
 const start = async () => {
     try {
         await connectDB(connectionString);

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import links from '../utils/links'
 
+// component that show sidebars links for going from one page to another
 const NavLinks = ({ toggleSidebar }) => {
   return (
     <div className='nav-links'>

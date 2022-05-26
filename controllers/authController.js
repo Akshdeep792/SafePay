@@ -7,7 +7,7 @@ import {BadRequestError, UnAuthenticatedError} from '../errors/index.js'
 
 
 
-
+// registering user to database
 const register = async (req,res) => {
         const {name, email, password} = req.body;
         if(!name || !email || !password){
@@ -27,6 +27,7 @@ const register = async (req,res) => {
             upiId: user.upiId
         }, token});
 }
+// log in user
 
 const login = async (req,res) => {
     
@@ -49,6 +50,7 @@ const login = async (req,res) => {
 
 }
 
+// update user credentials
 const updateUser = async (req,res) => {
     const {email, name, lastName, upiId, number} = req.body;
 

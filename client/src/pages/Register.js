@@ -3,6 +3,7 @@ import { Logo, Input, Alert } from '../components/UI/index'
 import Wrapper from '../assets/wrappers/RegisterPage'
 import { useAppContext } from '../context/appContext'
 import {useNavigate} from 'react-router-dom'
+// initial form values
 const initialState = {
     name: '',
     email: '',
@@ -17,11 +18,13 @@ const Register = () => {
     const { user, isLoading, showAlert, displayAlert, registerUser , loginUser} = useAppContext()
     const navigate = useNavigate();
 
+    // updating values enter by user
     const onChangeHandler = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
 
     }
 
+    // submittng credentials enter by user
     const onSubmitHandler = (event) => {
         event.preventDefault()
         const { name, email, password, isMember } = values
@@ -36,8 +39,9 @@ const Register = () => {
         else{
             registerUser(currentUser)
         }
-        // console.log(values)
+        
     }
+    // for handling login and register inputs
     const toggleHandler = () => {
         setValues({ ...values, isMember: !values.isMember })
     }

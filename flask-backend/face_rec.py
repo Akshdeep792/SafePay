@@ -5,9 +5,11 @@ import os
 import io
 import base64
 
+# face recognition algorithm. package used face_recognition. All documentation will be provided in readme
 class FaceRec:
 
     def __init__(self, known_person_path_file, unknown_images_path_file, known_name=None):
+        #initializing
         self.known_person_path_file = known_person_path_file
         self.unknown_images_path_file = unknown_images_path_file
         self.known_name = known_name 
@@ -36,11 +38,9 @@ class FaceRec:
                 for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
                 
                     matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
-                    print(matches)
                     name = "Unknown"
                     
                     face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
-                    print(face_distances);
                     best_match_index = np.argmin(face_distances)
 
                     if matches[best_match_index] and face_distances < 0.6: 

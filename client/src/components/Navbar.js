@@ -20,13 +20,12 @@ const Navbar = () => {
                     <Logo />
                     <h3 className='logo-text'>dashboard</h3>
                 </div>
-
+                {/*container that show logout button and name of user in top right   */}
                 <div className='btn-container'>
-                    <button className='btn' onClick={() => setShowLogout(!showLogout)}>
+                    <button className='btn' onClick={() => setShowLogout(!showLogout)}>  {/* setShowLogout will clear all the values in local storage and logout the user */}
                         <FaUserCircle />
-                        {/* {user.name} */}
-                        {/* {user && user.name} */}
-                        {user?.name} 
+                        {/* getting user name for current logged in user */}
+                        {user?.name}
                         <FaCaretDown />
                     </button>
                     <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>

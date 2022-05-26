@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import Wrapper from '../assets/wrappers/LandingPage' //importing CSS for the following page
 const Landing = () =>{
     return <Wrapper>
+      {/* main navbar with logo */}
         <nav> 
           <Logo />
         </nav>

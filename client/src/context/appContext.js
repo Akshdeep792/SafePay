@@ -1,7 +1,7 @@
 //setting global context 
 
 import React, { useReducer, useContext } from 'react'
-import reducer from './reducer'
+import reducer from './reducer' // for handling dispatch used in diffrent place in diffrent functions
 //importing actions
 import {
   DISPLAY_ALERT,
@@ -32,12 +32,11 @@ import {
   VERIFICATION_SUCCESS,
   SET_STATUS,
 
-
-
 } from './action'
 
-import axios from 'axios'
+import axios from 'axios' //Promise based HTTP client for the browser 
 
+// getting from local storage after user is logged in
 const token = localStorage.getItem('token')
 const user = localStorage.getItem('user')
 
@@ -50,7 +49,7 @@ export const initialState = {
   token: token,
   showSidebar: false,
   showModal: false,
-  users: [],
+  users: [],// getting image of user from backend
   imageId: '',
   file: '',
   payto: '',
@@ -63,18 +62,18 @@ export const initialState = {
   face: '',
   paymentFace: '',
   
-  
 }
 
 //global app context
 const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
 
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState) // all the dispatches can be found in ./reducer.js
   const authFetch = axios.create({
     baseURL: '/api/v1',
   })
 
+  // handling axios errors
   authFetch.interceptors.request.use((config) => {
 
     config.headers.common['Authorization'] = `Bearer ${state.token}`
@@ -101,10 +100,11 @@ const AppProvider = ({ children }) => {
 
   //*****Helper Functions ***/
 
-  const displayAlert = (msg) => {
+  const displayAlert = (msg) => { // show diffrent alerts for diffrent errors
     dispatch({ type: DISPLAY_ALERT, payload : {alertText : msg} })
     clearAlert();
   }
+  // clearing alert in global state and getting ready for new one
   const clearAlert = () => {
     setTimeout(() => {
       dispatch({
@@ -112,9 +112,11 @@ const AppProvider = ({ children }) => {
       })
     }, 3000)
   }
+  //clear values in current state
   const clearValues = () => {
     dispatch({ type: CLEAR_VALUES })
   }
+
   const addUserToLocalStorage = ({ user, token }) => {
     localStorage.setItem('user', JSON.stringify(user))
     localStorage.setItem('token', token);
@@ -125,9 +127,11 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem('user')
 
   }
+  //for handling change in our form
   const handleChange = ({ name, value }) => {
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } })
   }
+  // these are diffrent functions that to diffrent works according to there name
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR })
   }
@@ -138,6 +142,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGOUT_USER })
     removeUserFromLocalStorage();
   }
+  // set payment status after being verified
   const setStatus = ()=>{
     dispatch({type: SET_STATUS})
   }
@@ -198,7 +203,8 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   }
-// function for adding face to database
+
+// function for adding face to database and uploading it in cloudinary
   const addFace = async (base64encodedImage) => {
 
     dispatch({ type: ADD_IMAGE_BEGIN });
@@ -221,7 +227,7 @@ const AppProvider = ({ children }) => {
       })
     }
   }
-// getting face from database
+// getting face from cloudinary
   const getUser = async () => {
     dispatch({ type: GET_USER_BEGIN })
     try {
@@ -239,7 +245,8 @@ const AppProvider = ({ children }) => {
 
     }
   }
-  //transaction doing transactions
+
+  //function for doing transactions
   const makeTransaction = async () => {
     console.log("Running")
     try {
@@ -260,6 +267,7 @@ const AppProvider = ({ children }) => {
 
     }
   }
+
   //getting history of transactions
   const getTransaction = async () => {
 
@@ -300,7 +308,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        ...state, displayAlert, registerUser, loginUser, logoutUser, toggleSidebar,
+        ...state, displayAlert, registerUser, loginUser, logoutUser, toggleSidebar, // exporting diffrent functions for their use
         modalToggle, addFace, handleChange, getUser, makeTransaction, clearValues,
         updateUser, getTransaction, verifyImage, setStatus
       }}

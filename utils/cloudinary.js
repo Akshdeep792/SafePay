@@ -1,4 +1,4 @@
-
+//cloudinary helper function 
 import dotenv from 'dotenv'
 dotenv.config();
 import cloudinary from 'cloudinary';
@@ -8,5 +8,5 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// module.exports = { cloudinary };
+
 export {cloudinary}

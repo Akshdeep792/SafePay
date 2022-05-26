@@ -2,9 +2,10 @@ import Wrapper from "../assets/wrappers/Success"
 import { useAppContext } from "../context/appContext"
 import success from '../assets/images/success.png'
 import { useNavigate } from "react-router-dom"
+// this component will render when face is recognized. It is done in ../pages/status
 const Success = () => {
      const navigate = useNavigate();
-    const {payto, accountNo, upiId, amount, setStatus, clearValues, logoutUser} = useAppContext();
+    const {payto, accountNo, amount, setStatus, clearValues, logoutUser} = useAppContext();
     
     const logOutHandler = () => {
         logoutUser();
@@ -16,6 +17,7 @@ const Success = () => {
             clearValues();
     }
     return (
+        // success page design
         <Wrapper className='full-page'>
             <div className="form">
                 <img src={success} alt='Done' />

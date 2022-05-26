@@ -8,9 +8,11 @@ const TransactionPage = () => {
     const {showAlert, isLoading, handleChange, payto, accountNo, upiId, displayAlert, amount} = useAppContext();
     const navigate = useNavigate();
     
+    // this will help us to navigating to verification page with credentials saved
     const onSubmitHandler = (e) => {
         e.preventDefault();
         
+        //checking errors
         if (!payto || !accountNo || !upiId || !amount) {
             displayAlert('Please Provide All values ')
             return
@@ -25,6 +27,7 @@ const TransactionPage = () => {
         }
         navigate('/verification')
     }
+    // for saving values in global state
     const onChangeHandler =(e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -35,9 +38,10 @@ const TransactionPage = () => {
     <form className='form' onSubmit={onSubmitHandler}>
         <Logo />
         <h3>Enter Details</h3>
+        {/* showing alert messages */}
         {showAlert && <Alert />}
-        {/* name field */}
-       
+        
+       {/* Enter credentials */}
         <Input type='text' value={payto} name='payto' onChange={onChangeHandler} />
         <Input type='number' value={accountNo} name='accountNo' labelText='accountNo(16 digits)' onChange={onChangeHandler} />
         <Input type='text' value={upiId} name='upiId' labelText="Enter your upiId" onChange={onChangeHandler} />

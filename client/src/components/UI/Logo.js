@@ -1,5 +1,7 @@
 import logo from '../../assets/images/logo.png'
 
+
+// Logo of the Web App.
 const Logo = () => {
     return (
         <div className='logo logo-main'>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import Wrapper from "../assets/wrappers/ErrorPage"
 import img from '../assets/images/not-found.svg'
 
+// for showing page 404 not found
 const Error = () => {
     return <Wrapper className="full-page">
         <div>

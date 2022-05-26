@@ -43,6 +43,7 @@ const UserSchema = new mongoose.Schema({
 
 })
 
+// bcrypt method for saving hashed password
 UserSchema.pre('save', async function(){
     if(!this.isModified('password')){
         return;
@@ -51,11 +52,13 @@ UserSchema.pre('save', async function(){
     this.password = await bcrypt.hash(this.password, salt);
 })
 
+// creating token
 UserSchema.methods.createJWT = function(){
     // console.log(this);
     return jwt.sign({userId: this._id}, process.env.JWT_SECRET, {expiresIn : process.env.JWT_LIFETIME})
 }
 
+// compare entered password and hashed password
 UserSchema.methods.comparePassword = async function(candidatePassword){
     const isMatch = await bcrypt.compare(candidatePassword,this.password);
     return isMatch

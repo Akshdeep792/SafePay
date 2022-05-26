@@ -6,11 +6,14 @@ import Wrapper from '../../assets/wrappers/History'
 const History = () => {
     const { isLoading, getTransaction, transactions, totalTransaction } = useAppContext();
     useEffect(() => {
-        getTransaction();
+        getTransaction(); //getting transaction by calling this function in app context file
     }, [])
+
+    //if getting data takes time
     if (isLoading) {
         return <Loading center />
     }
+    // if no transaction has been done
     if (totalTransaction === 0) {
         return (
             <Wrapper>
@@ -21,8 +24,9 @@ const History = () => {
     return (
         <Wrapper>      
              <div className='transaction'>
+                 {/* showing transactions done so far */}
             {transactions.map((trans) => {
-                return <TransactionContainer key={trans._id} {...trans} />
+                return <TransactionContainer key={trans._id} {...trans} /> // constainer that contains transaction details
             })}
         </div>
         </Wrapper>
