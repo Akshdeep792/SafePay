@@ -5,8 +5,7 @@ import { useAppContext } from '../../context/appContext'
 import Wrapper from '../../assets/wrappers/Profile'
 
 const Profile = () => {
-  const { user, showAlert, displayAlert, updateUser, isLoading } =
-    useAppContext()
+  const { user, showAlert, updateUser, isLoading } = useAppContext()
   const [name, setName] = useState(user?.name)
   const [email, setEmail] = useState(user?.email)
   const [lastName, setLastName] = useState(user?.lastName)
@@ -52,14 +51,14 @@ const Profile = () => {
             type='text'
             name='upiId'
             value={upiId}
-            handleChange={(e) => setUpiId(e.target.value)}
+            onChange={(e) => setUpiId(e.target.value)}
           />
            <Input
           labelText='number'
             type='text'
             name='number'
             value={number}
-            handleChange={(e) => setNumber(e.target.value)}
+            onChange={(e) => setNumber(e.target.value)}
           />
           <button className='btn btn-block' type='submit' disabled={isLoading}>
             {isLoading ? 'Please Wait...' : 'save changes'}

@@ -32,6 +32,8 @@ import {
   VERIFICATION_SUCCESS,
   SET_STATUS,
 
+
+
 } from './action'
 
 import axios from 'axios'
@@ -47,7 +49,6 @@ export const initialState = {
   user: user ? JSON.parse(user) : null,
   token: token,
   showSidebar: false,
-  // hasFace: false,
   showModal: false,
   users: [],
   totalUsers: 0,
@@ -60,9 +61,12 @@ export const initialState = {
   transactions: [],
   totalTransaction: 0,
   face: '',
-  paymentFace: ''
+  paymentFace: '',
+  
   
 }
+
+//global app context
 const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
 
@@ -230,6 +234,7 @@ const AppProvider = ({ children }) => {
   }
   //transaction doing transactions
   const makeTransaction = async () => {
+    console.log("Running")
     try {
       const { payto, accountNo, upiId, amount, paymentStatus , paymentFace} = state;
       await authFetch.post('/trans/transaction', {
@@ -241,6 +246,7 @@ const AppProvider = ({ children }) => {
         paymentFace
 
       })
+      
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({ type: TRANSACTION_ERROR, payload: { msg: error.response.data.msg } })
@@ -264,14 +270,14 @@ const AppProvider = ({ children }) => {
     clearAlert();
   }
   //verify user using face recognition by sending post request to flask backend using below route
-  const verifyImage = async (imageSrc) => {
+  const verifyImage = async (imageSrc, knownUrl) => {
     dispatch({ type: VERIFICATION_BEGIN })
     try {
-      const response  = await axios.post('http://127.0.0.1:5000/api/verify', { data: imageSrc })
+      const response  = await axios.post('http://127.0.0.1:5000/api/verify', { data: imageSrc , known : knownUrl })
 
       console.log(`${response.data}`);
       if (response.data === 'User') {
-        dispatch({ type: VERIFICATION_SUCCESS, payload: { status: true,face : response.data, paymentFace: imageSrc } })
+        dispatch({ type: VERIFICATION_SUCCESS, payload: { status: true, face : response.data, paymentFace: imageSrc } })
 
       }
       else {

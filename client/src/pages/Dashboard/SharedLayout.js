@@ -1,3 +1,5 @@
+//common layout design for dashboard
+
 import { Outlet } from "react-router-dom"
 import Wrapper from "../../assets/wrappers/SharedLayout"
 import { Navbar} from "../../components"

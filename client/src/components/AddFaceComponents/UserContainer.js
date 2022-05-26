@@ -11,7 +11,8 @@ const UserContainer = () => {
     if(isLoading){
         return <Loading center/>
     }
-
+    const url = `http://localhost:4000/${users[0].filePath}`
+    console.log(url)
 
     if(users.length === 0){
         return (

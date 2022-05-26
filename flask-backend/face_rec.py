@@ -51,4 +51,4 @@ class FaceRec:
                     return name
 
 
-user = FaceRec('./known-people/Aksh12.jpg', './stranger', 'User')
+user = FaceRec('known.jpeg', './stranger', 'User')

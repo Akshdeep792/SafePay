@@ -24,11 +24,14 @@ import {
   GET_TRANSACTION_SUCCESS,
   VERIFICATION_BEGIN,
   VERIFICATION_SUCCESS,
-  SET_STATUS
+  SET_STATUS,
+
   
 } from "./action"
 import {initialState} from "./appContext"
 
+
+//setting state variables according to requirements
 const reducer = (state, action) => {
 
   if (action.type === DISPLAY_ALERT) {
@@ -230,9 +233,12 @@ const reducer = (state, action) => {
       ...state,
       face: '',
       paymentStatus : false,
-      paymentFace: ''
+      paymentFace: '',
+      file: '',
+      alertText: '',
+      alertType: ''
     }
   }
-
+ 
 }
 export default reducer

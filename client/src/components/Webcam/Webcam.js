@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Webcam from "react-webcam";
 import Wrapper from '../../assets/wrappers/Webcam'
 import { useAppContext } from '../../context/appContext';
 
 
 const WebcamComponent = () => <Webcam />;
-
 
 const videoConstraints = {
     width: 220,
@@ -15,7 +14,10 @@ const videoConstraints = {
 
 export const WebcamCapture = () => {
 
-    const {verifyImage, paymentStatus} = useAppContext();
+    const {verifyImage, paymentStatus, getUser, users} = useAppContext();
+    // useEffect(()=>{
+    //     getUser();
+    // },[])
     const [image, setImage] = useState('');
     const webcamRef = React.useRef(null);
 
@@ -28,8 +30,10 @@ export const WebcamCapture = () => {
 
         }, [webcamRef]);
     const onClickHandler = () => {
+        const known = 'https://raw.githubusercontent.com/Akshdeep792/Securing-Online-Transaction/master/Aksh12.jpg'
+        console.log(known)
     
-        verifyImage(image);
+        verifyImage(image, known);
     }
 
     return (
@@ -57,6 +61,7 @@ export const WebcamCapture = () => {
                         Retake Image</button> :
                     <button onClick={(e) => {
                         e.preventDefault();
+                       
                         capture();
                     }}
                         className="btn btn-block btn-photo">Capture</button>

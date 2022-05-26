@@ -41,6 +41,8 @@ export const VERIFICATION_BEGIN = 'VERIFICATION_BEGIN'
 export const VERIFICATION_SUCCESS = 'VERIFICATION_SUCCESS'
 export const SET_STATUS = 'SET_STATUS'
 
+export const REMOVE_FACE = 'REMOVE_FACE'
+
 
 
 // console.log(values)

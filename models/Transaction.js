@@ -10,7 +10,7 @@ const TransactionSchema = new mongoose.Schema( {
         type : Number,
         required: [true, 'Please provide number/accountNo'],
         minlength: 10,
-        maxlength: 18
+        maxlength: 16
     },
     upiId: {
         type: String ,
