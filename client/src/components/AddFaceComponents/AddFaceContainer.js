@@ -4,7 +4,7 @@ import Wrapper from '../../assets/wrappers/AddFace'
 import { useAppContext } from '../../context/appContext'
 
 const AddFaceContainer = () => {
-    const { showAlert, isLoading, displayAlert , addFace, totalUsers} = useAppContext();
+    const { showAlert, isLoading, displayAlert , addFace} = useAppContext();
     const [singleFile, setSingleFile] = useState('');
     const fileHandler = (e) =>{
         setSingleFile(e.target.files[0])
@@ -15,9 +15,13 @@ const AddFaceContainer = () => {
             displayAlert();
             return ;
         }
-        const formData = new FormData();
-        formData.append('file', singleFile);
-        addFace(formData);
+        // const formData = new FormData();
+        // formData.append('file', singleFile);
+        const reader = new FileReader();
+        reader.readAsDataURL(singleFile)
+        reader.onloadend= () =>{
+            addFace(reader.result);
+        }
         setSingleFile('');
     }
 
@@ -36,7 +40,7 @@ const AddFaceContainer = () => {
                 
                 <button
                     className='btn btn-block'
-                    disabled={isLoading}
+                
                     onClick={handleSubmit}
                 >
                     AddFace

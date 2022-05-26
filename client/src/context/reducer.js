@@ -39,7 +39,7 @@ const reducer = (state, action) => {
       ...state,
       showAlert: true,
       alertType: 'danger',
-      alertText: 'Please provide all values!',
+      alertText: action.payload.alertText,
     }
   }
   if (action.type === CLEAR_ALERT) {
@@ -189,7 +189,7 @@ const reducer = (state, action) => {
       ...state,
       isLoading : false,
       users: action.payload.users,
-      totalUsers : action.payload.totalUsers
+      imageId : action.payload.imageId
     }
   }
   if(action.type === GET_TRANSACTION_BEGIN){
@@ -214,7 +214,7 @@ const reducer = (state, action) => {
       isLoading: true,
       showAlert: true,
       alertType : 'success',
-      alertText : 'Verifying User....'
+      alertText : 'Verifying User Please Wait....'
     }
   }
 

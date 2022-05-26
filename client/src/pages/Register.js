@@ -26,7 +26,7 @@ const Register = () => {
         event.preventDefault()
         const { name, email, password, isMember } = values
         if (!email || !password || (!isMember && !name)) {
-            displayAlert()
+            displayAlert('Please Provide All values!')
             return
         }
         const currentUser = {name,email, password};

@@ -2,8 +2,9 @@ import {useAppContext} from '../../context/appContext'
 import {useEffect} from 'react'
 import Loading from  '../UI/Loading'
 import Wrapper from '../../assets/wrappers/UserContainer'
+import {Image} from 'cloudinary-react'
 const UserContainer = () => {
-    const {getUser, users, isLoading} = useAppContext()
+    const {getUser, users, isLoading, imageId} = useAppContext()
     useEffect(() => {
         getUser();
     }, [])
@@ -11,10 +12,10 @@ const UserContainer = () => {
     if(isLoading){
         return <Loading center/>
     }
-    const url = `http://localhost:4000/${users[0].filePath}`
+    const url = `${users.url}`
     console.log(url)
 
-    if(users.length === 0){
+    if(imageId === ''){
         return (
             <Wrapper>
                 <h2>No Face...</h2>
@@ -24,16 +25,17 @@ const UserContainer = () => {
     return(
         <Wrapper>
                
-                <div className='users'>
-                        {users.map((user) => 
+                <div className='users'> 
                         <div className='card'>
-                            <img key={user._id} src={`http://localhost:4000/${user.filePath}`} height="200" alt='user img' />
-                            <footer className='info'>
-                                <h2>{user.relation}</h2>
-                            </footer>
+                            <Image 
+                              cloudName="dcnkefkft"
+                               publicId = {imageId}
+                               width='200'
+                            />
+                            
                         </div>
 
-                        )}
+                        
                 </div>
         </Wrapper>
     )

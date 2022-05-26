@@ -12,8 +12,16 @@ const TransactionPage = () => {
         e.preventDefault();
         
         if (!payto || !accountNo || !upiId || !amount) {
-            displayAlert()
+            displayAlert('Please Provide All values ')
             return
+        }
+        if(accountNo.toString().length !== 16){
+            displayAlert("AccountNo Must be of 16 digits")
+            return;
+        }
+        if(!upiId.includes("@upi")){
+            displayAlert("Must Include @upi in upiId")
+            return;
         }
         navigate('/verification')
     }

@@ -14,10 +14,9 @@ const videoConstraints = {
 
 export const WebcamCapture = () => {
 
-    const {verifyImage, paymentStatus, getUser, users} = useAppContext();
-    // useEffect(()=>{
-    //     getUser();
-    // },[])
+    
+    const {verifyImage, users} = useAppContext();
+    
     const [image, setImage] = useState('');
     const webcamRef = React.useRef(null);
 
@@ -30,7 +29,7 @@ export const WebcamCapture = () => {
 
         }, [webcamRef]);
     const onClickHandler = () => {
-        const known = 'https://raw.githubusercontent.com/Akshdeep792/Securing-Online-Transaction/master/Aksh12.jpg'
+        const known = `${users.url}`
         console.log(known)
     
         verifyImage(image, known);

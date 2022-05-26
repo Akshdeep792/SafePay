@@ -51,7 +51,7 @@ export const initialState = {
   showSidebar: false,
   showModal: false,
   users: [],
-  totalUsers: 0,
+  imageId: '',
   file: '',
   payto: '',
   accountNo: 0,
@@ -101,8 +101,8 @@ const AppProvider = ({ children }) => {
 
   //*****Helper Functions ***/
 
-  const displayAlert = () => {
-    dispatch({ type: DISPLAY_ALERT })
+  const displayAlert = (msg) => {
+    dispatch({ type: DISPLAY_ALERT, payload : {alertText : msg} })
     clearAlert();
   }
   const clearAlert = () => {
@@ -199,12 +199,16 @@ const AppProvider = ({ children }) => {
     clearAlert();
   }
 // function for adding face to database
-  const addFace = async (data) => {
+  const addFace = async (base64encodedImage) => {
+
     dispatch({ type: ADD_IMAGE_BEGIN });
     try {
 
       await authFetch.post('/add-image',
-        data
+        {
+          data: base64encodedImage,
+        },
+        
       )
       dispatch({ type: ADD_IMAGE_SUCCESS });
       clearAlert();
@@ -221,11 +225,14 @@ const AppProvider = ({ children }) => {
   const getUser = async () => {
     dispatch({ type: GET_USER_BEGIN })
     try {
-      const { data } = await authFetch('/get-images')
-      const { users, totalUsers } = data;
+      const  {data}  = await authFetch('/get-images')
+      console.log(data)
+      const resource = data.resource
+      console.log(resource)
+      const publicId = data.publicId
       dispatch({
         type: GET_USER_SUCCESS,
-        payload: { users, totalUsers }
+        payload: { users : resource.resources[0] ,imageId:  publicId }
       })
     } catch (error) {
       console.log(error)
