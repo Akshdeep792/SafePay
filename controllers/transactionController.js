@@ -23,7 +23,7 @@ const history = async(req,res) => {
     }
 
     
-    const transactions = await Transaction.find({$query : {queryObject}, $orderby : 1});
+    const transactions = await Transaction.find(queryObject);
     const totalTransaction = await Transaction.countDocuments(queryObject)
     res.status(StatusCodes.OK).json({transactions, totalTransaction})
 }

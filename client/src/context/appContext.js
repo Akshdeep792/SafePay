@@ -56,7 +56,7 @@ export const initialState = {
   accountNo: 0,
   upiId: '',
   amount: 0,
-  paymentStatus: false,
+  paymentStatus: null,
   transactions: [],
   totalTransaction: 0,
   face: '',
@@ -304,13 +304,26 @@ const AppProvider = ({ children }) => {
       logoutUser();
     }
   }
+  // sending mail in case of unknown identity
+  const sendErrorMail = async () =>{
+    console.log("Running")
+    try {
+      const {paymentFace, user} = state
+        await authFetch.post('/errormail/sendmail', {
+          to : user.email, // email of user
+          paymentFace // current face 
+       })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <AppContext.Provider
       value={{
         ...state, displayAlert, registerUser, loginUser, logoutUser, toggleSidebar, // exporting diffrent functions for their use
         modalToggle, addFace, handleChange, getUser, makeTransaction, clearValues,
-        updateUser, getTransaction, verifyImage, setStatus
+        updateUser, getTransaction, verifyImage, setStatus, sendErrorMail
       }}
     >
       {children}

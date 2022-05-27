@@ -10,10 +10,13 @@ import morgan from 'morgan'
 import connectDB from './db/connect-db.js';
 const connectionString = process.env.MONGO_URL
 
+
+
 //routes
 import authRouter from './routes/auth-routes.js'
 import transactionRouter from './routes/transaction-routes.js'
 import imageUploadRouter from './routes/add-Image.js'
+import sendmailRouter from './routes/sendmail.js' 
 //middlewares
 import notFoundMiddleware from './middleware/not-found.js'
 import errorHandlerMiddleware from './middleware/error-handler.js'
@@ -27,6 +30,7 @@ app.use(express.json({limit : '50mb'}))
 app.use(express.urlencoded({limit : '50mb', extended : true}))
 
 
+
 app.get('/', (req, res) => {
   res.send('Welcome!')
 })
@@ -35,6 +39,8 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/trans', auth, transactionRouter)
 app.use('/api/v1', auth, imageUploadRouter)
+app.use('/api/v1/errormail', auth, sendmailRouter)
+
 
 
 //middlewares for handling  errors

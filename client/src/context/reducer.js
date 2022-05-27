@@ -232,7 +232,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       face: '',
-      paymentStatus : false,
+      paymentStatus : null,
       paymentFace: '',
       file: '',
       alertText: '',
