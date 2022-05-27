@@ -25,6 +25,7 @@ First clone this repo
   cd SafePay
 ```
 Then Install Dependencies  
+### Make sure you have nodejs installed in your system
   #### For Node server
  ```bash
   npm install
@@ -34,7 +35,8 @@ Then Install Dependencies
   cd client 
   npm install
 ```
-If Flask Not worked than you should run following commands, Otherwise it will run
+### Make sure you have python installed in your system
+In Case Flask Not worked than you should run following commands, Otherwise it will run
 ```bash
 cd Flask-Backend
 pip3 install click
@@ -54,7 +56,7 @@ For MERN open git terminal and Run
 ```bash
     npm start
 ```
-Above command will start React and Nodejs concurrently  
+Above command will start React and Nodejs concurrently (You can see script in package.json)
 
 For Flask-Backend open second Git terminal and run
 ```bash
