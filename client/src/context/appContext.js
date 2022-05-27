@@ -232,9 +232,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_USER_BEGIN })
     try {
       const  {data}  = await authFetch('/get-images')
-      console.log(data)
       const resource = data.resource
-      console.log(resource)
       const publicId = data.publicId
       dispatch({
         type: GET_USER_SUCCESS,
@@ -248,7 +246,6 @@ const AppProvider = ({ children }) => {
 
   //function for doing transactions
   const makeTransaction = async () => {
-    console.log("Running")
     try {
       const { payto, accountNo, upiId, amount, paymentStatus , paymentFace} = state;
       await authFetch.post('/trans/transaction', {
@@ -288,9 +285,7 @@ const AppProvider = ({ children }) => {
   const verifyImage = async (imageSrc, knownUrl) => {
     dispatch({ type: VERIFICATION_BEGIN })
     try {
-      const response  = await axios.post('http://127.0.0.1:5000/api/verify', { data: imageSrc , known : knownUrl })
-
-      console.log(`${response.data}`);
+      const response  = await axios.post('http://localhost:5000/api/verify', { data: imageSrc , known : knownUrl })
       if (response.data === 'User') {
         dispatch({ type: VERIFICATION_SUCCESS, payload: { status: true, face : response.data, paymentFace: imageSrc } })
 
@@ -306,7 +301,6 @@ const AppProvider = ({ children }) => {
   }
   // sending mail in case of unknown identity
   const sendErrorMail = async () =>{
-    console.log("Running")
     try {
       const {paymentFace, user} = state
         await authFetch.post('/errormail/sendmail', {
