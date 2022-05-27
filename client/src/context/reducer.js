@@ -139,7 +139,12 @@ const reducer = (state, action) => {
     }
   }
   if (action.type === ADD_IMAGE_BEGIN) {
-    return { ...state, isLoading: true }
+    return { ...state, 
+      isLoading: true,
+      showAlert: true,
+      alertType: 'success',
+      alertText: 'Adding Face Please Wait'
+     }
   }
   if (action.type === ADD_IMAGE_SUCCESS) {
     return {
@@ -147,7 +152,7 @@ const reducer = (state, action) => {
       isLoading: false,
       showAlert: true,
       alertType: 'success',
-      alertText: 'User Added'
+      alertText: 'Face Added, Click On Show Face'
     }
 
   }

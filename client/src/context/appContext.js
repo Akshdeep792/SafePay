@@ -209,6 +209,7 @@ const AppProvider = ({ children }) => {
 
     dispatch({ type: ADD_IMAGE_BEGIN });
     try {
+      dispatch({ type: ADD_IMAGE_BEGIN });
 
       await authFetch.post('/add-image',
         {

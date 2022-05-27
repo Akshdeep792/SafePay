@@ -6,13 +6,22 @@ import { Message } from "../../components/UI"
 const AddFace = () => {
     const [toggleBtn, setToggleBtn] = useState(false)
     const {imageId} = useAppContext(); // coming from backend if image exist than its value will not empty string
+    const [status, setStatus] = useState(false) //it is for showing option of add image if not added
+
     
+    useEffect(()=>{
+        if(imageId !== ''){
+            setStatus(true)
+        }
+    },[imageId])
     // handle weather you want to see picture or not
     const clickHandler = () => {
         setToggleBtn(!toggleBtn)
     }
+  
+
+    
    
-    const status = imageId === ' ' ? true : false // for showing add user form 
     return (
        <Wrapper>
            {/* message for showing instruction of photo to be uploaded */}
