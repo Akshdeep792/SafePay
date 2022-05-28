@@ -4,8 +4,8 @@ This project uses face recognition as a security for online transactions. Now th
 
 ## Content 
 [Demo](#demo)  
+[Folder Structure](#folderstructure)   
 [Installation](#installation)  
-[Folder Structure and Description](#FS)  
 [Documentation](#documentation)
 
 
@@ -13,9 +13,10 @@ This project uses face recognition as a security for online transactions. Now th
 
 ## Demo
 
-Insert gif or link to demo
+[Project Demo](https://drive.google.com/file/d/1TOMhbAUJd1dRgJHcx7N5jQFLshw04Gza/view?usp=sharing)
 
-
+## Folder Structure
+ See folder structure here [Folder](https://whimsical.com/plan-5rpme5Vs2E22DyziqZncGd)
 ## Installation
 
 First clone this repo
