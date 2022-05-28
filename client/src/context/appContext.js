@@ -286,7 +286,7 @@ const AppProvider = ({ children }) => {
   const verifyImage = async (imageSrc, knownUrl) => {
     dispatch({ type: VERIFICATION_BEGIN })
     try {
-      const response  = await axios.post('http://localhost:5000/api/verify', { data: imageSrc , known : knownUrl })
+      const response  = await axios.post('https://safepay-flaskserver.herokuapp.com/api/verify', { data: imageSrc , known : knownUrl })
       if (response.data === 'User') {
         dispatch({ type: VERIFICATION_SUCCESS, payload: { status: true, face : response.data, paymentFace: imageSrc } })
 
