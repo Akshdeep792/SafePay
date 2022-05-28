@@ -35,8 +35,9 @@ Then Install Dependencies
   cd client 
   npm install
 ```
+## I have deployed flask backend to heroku. There is no need to run following command.If it not worked than you can run following commands. You can skip this for now
 ### Make sure you have python installed in your system
-In Case Flask Not worked than you should run following commands, Otherwise it will run
+
 ```bash
 cd Flask-Backend
 pip3 install click
@@ -49,16 +50,37 @@ pip3 install gunicorn
 pip3 install Flask-Cors
 ```
 #### Create .env file (Most Important)  
+example.env
+```bash
+MONGO_URL_LOCAL="local host mongo url"
+MONGO_URL="Atlas url"
+JWT_SECRET="JWT token secret key"
+JWT_LIFETIME=1d
+
+
+CLOUDINARY_NAME="you will get when you create account"
+CLOUDINARY_API_KEY="this also"
+CLOUDINARY_API_SECRET="this also"
+
+SAFEPAY_MAIL="nodemailer_mail_from where you want to send email to user"
+SAFEPAY_PASSWORD="nodemailer_password"
+```
 
 All the Dependencies have been installed. Now you should run the project
 
-For MERN open git terminal and Run
+For MERN open git terminal and Run in main project directory 
 ```bash
     npm start
 ```
 Above command will start React and Nodejs concurrently (You can see script in package.json)
 
 For Flask-Backend open second Git terminal and run
+### I have deployed flask backend to heroku. There is no need to run following command.It will work finally.If it not worked than you can run following commands and replace the command shown in follwing link
+[Code](https://drive.google.com/file/d/1HyoF_oj9PIJBb0iCL-r6rYjEyJZDN_pe/view?usp=sharing)
+with following command in appContext.js
+```bash
+ await axios.post('http://localhost:5000/api/verify'
+```
 ```bash
     cd flask-backend 
     python app.py
