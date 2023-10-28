@@ -7,7 +7,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
-    "cloudinary-react": "^1.7.2",
+    "cloudinary-react": "^1.8.1",
     "history": "^5.3.0",
     "moment": "^2.29.3",
     "node-polyfill-webpack-plugin": "^1.1.4",
@@ -44,6 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:4000"
+  }
 }

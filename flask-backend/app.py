@@ -14,7 +14,8 @@ import requests
 
 
 app = Flask(__name__)
-CORS(app)
+
+CORS(app,resources={r"/*":{"origins":"*"}})
 
 
 @app.route('/api/verify', methods=['POST', 'GET']) # request coming from react
@@ -54,4 +55,4 @@ def api():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5001)

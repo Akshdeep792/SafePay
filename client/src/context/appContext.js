@@ -61,7 +61,7 @@ export const initialState = {
   totalTransaction: 0,
   face: '',
   paymentFace: '',
-  
+
 }
 
 //global app context
@@ -70,7 +70,7 @@ const AppProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState) // all the dispatches can be found in ./reducer.js
   const authFetch = axios.create({
-    baseURL: '/api/v1',
+    baseURL: 'http://localhost:4000/api/v1',
   })
 
   // handling axios errors
@@ -101,7 +101,7 @@ const AppProvider = ({ children }) => {
   //*****Helper Functions ***/
 
   const displayAlert = (msg) => { // show diffrent alerts for diffrent errors
-    dispatch({ type: DISPLAY_ALERT, payload : {alertText : msg} })
+    dispatch({ type: DISPLAY_ALERT, payload: { alertText: msg } })
     clearAlert();
   }
   // clearing alert in global state and getting ready for new one
@@ -143,15 +143,15 @@ const AppProvider = ({ children }) => {
     removeUserFromLocalStorage();
   }
   // set payment status after being verified
-  const setStatus = ()=>{
-    dispatch({type: SET_STATUS})
+  const setStatus = () => {
+    dispatch({ type: SET_STATUS })
   }
 
   //***function-->login ,register and update user */
   const registerUser = async (currentUser) => {
     dispatch({ type: REGISTER_USER_BEGIN })
     try {
-      const response = await axios.post('/api/v1/auth/register', currentUser);
+      const response = await axios.post('http://localhost:4000/api/v1/auth/register', currentUser);
       console.log(response);
       const { user, token } = await response.data;
       dispatch({
@@ -171,7 +171,7 @@ const AppProvider = ({ children }) => {
   const loginUser = async (currentUser) => {
     dispatch({ type: LOGIN_USER_BEGIN })
     try {
-      const response = await axios.post('/api/v1/auth/login', currentUser);
+      const response = await axios.post('http://localhost:4000/api/v1/auth/login', currentUser);
 
       const { user, token } = await response.data;
       dispatch({
@@ -192,7 +192,7 @@ const AppProvider = ({ children }) => {
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN })
     try {
-      const { data } = await authFetch.patch('/auth/updateUser', currentUser)
+      const { data } = await authFetch.patch('http://localhost:4000/auth/updateUser', currentUser)
       const { user, token } = data;
       dispatch({ type: UPDATE_USER_SUCCESS, payload: { user, token } })
       addUserToLocalStorage({ user, token });
@@ -204,7 +204,7 @@ const AppProvider = ({ children }) => {
     clearAlert();
   }
 
-// function for adding face to database and uploading it in cloudinary
+  // function for adding face to database and uploading it in cloudinary
   const addFace = async (base64encodedImage) => {
 
     dispatch({ type: ADD_IMAGE_BEGIN });
@@ -215,7 +215,7 @@ const AppProvider = ({ children }) => {
         {
           data: base64encodedImage,
         },
-        
+
       )
       dispatch({ type: ADD_IMAGE_SUCCESS });
       clearAlert();
@@ -228,16 +228,16 @@ const AppProvider = ({ children }) => {
       })
     }
   }
-// getting face from cloudinary
+  // getting face from cloudinary
   const getUser = async () => {
     dispatch({ type: GET_USER_BEGIN })
     try {
-      const  {data}  = await authFetch('/get-images')
+      const { data } = await authFetch('/get-images')
       const resource = data.resource
       const publicId = data.publicId
       dispatch({
         type: GET_USER_SUCCESS,
-        payload: { users : resource.resources[0] ,imageId:  publicId }
+        payload: { users: resource.resources[0], imageId: publicId }
       })
     } catch (error) {
       console.log(error)
@@ -248,7 +248,7 @@ const AppProvider = ({ children }) => {
   //function for doing transactions
   const makeTransaction = async () => {
     try {
-      const { payto, accountNo, upiId, amount, paymentStatus , paymentFace} = state;
+      const { payto, accountNo, upiId, amount, paymentStatus, paymentFace } = state;
       await authFetch.post('/trans/transaction', {
         payto,
         accountNo,
@@ -258,7 +258,7 @@ const AppProvider = ({ children }) => {
         paymentFace
 
       })
-      
+
     } catch (error) {
       if (error.response.status === 401) return;
       dispatch({ type: TRANSACTION_ERROR, payload: { msg: error.response.data.msg } })
@@ -286,13 +286,13 @@ const AppProvider = ({ children }) => {
   const verifyImage = async (imageSrc, knownUrl) => {
     dispatch({ type: VERIFICATION_BEGIN })
     try {
-      const response  = await axios.post('https://safepay-flaskserver.herokuapp.com/api/verify', { data: imageSrc , known : knownUrl })
+      const response = await axios.post('http://127.0.0.1:5001/api/verify', { data: imageSrc, known: knownUrl })
       if (response.data === 'User') {
-        dispatch({ type: VERIFICATION_SUCCESS, payload: { status: true, face : response.data, paymentFace: imageSrc } })
+        dispatch({ type: VERIFICATION_SUCCESS, payload: { status: true, face: response.data, paymentFace: imageSrc } })
 
       }
       else {
-        dispatch({ type: VERIFICATION_SUCCESS, payload: { status: false, face : response.data,  paymentFace: imageSrc } })
+        dispatch({ type: VERIFICATION_SUCCESS, payload: { status: false, face: response.data, paymentFace: imageSrc } })
 
       }
     } catch (error) {
@@ -301,13 +301,13 @@ const AppProvider = ({ children }) => {
     }
   }
   // sending mail in case of unknown identity
-  const sendErrorMail = async () =>{
+  const sendErrorMail = async () => {
     try {
-      const {paymentFace, user} = state
-        await authFetch.post('/errormail/sendmail', {
-          to : user.email, // email of user
-          paymentFace // current face 
-       })
+      const { paymentFace, user } = state
+      await authFetch.post('/errormail/sendmail', {
+        to: user.email, // email of user
+        paymentFace // current face 
+      })
     } catch (error) {
       console.log(error)
     }

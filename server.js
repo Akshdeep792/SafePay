@@ -1,6 +1,7 @@
 import express from 'express'
 const app = express()
 import dotenv from 'dotenv' // for env varialbes
+import cors from 'cors'
 dotenv.config();
 import 'express-async-errors'
 import morgan from 'morgan'
@@ -16,23 +17,31 @@ const connectionString = process.env.MONGO_URL
 import authRouter from './routes/auth-routes.js'
 import transactionRouter from './routes/transaction-routes.js'
 import imageUploadRouter from './routes/add-Image.js'
-import sendmailRouter from './routes/sendmail.js' 
+import sendmailRouter from './routes/sendmail.js'
 //middlewares
 import notFoundMiddleware from './middleware/not-found.js'
 import errorHandlerMiddleware from './middleware/error-handler.js'
 import auth from './middleware/auth.js';
 
-if(process.env.NODE_ENV !== 'production'){
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        credentials: true,
+        optionsSuccessStatus: 200
+    })
+);
+
+if (process.env.NODE_ENV !== 'production') {
     app.use(morgan('dev'))
 }
 
-app.use(express.json({limit : '50mb'}))
-app.use(express.urlencoded({limit : '50mb', extended : true}))
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ limit: '50mb', extended: true }))
 
 
 
 app.get('/', (req, res) => {
-  res.send('Welcome!')
+    res.send('Welcome!')
 })
 
 //routes

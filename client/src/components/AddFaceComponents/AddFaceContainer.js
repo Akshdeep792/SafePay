@@ -5,43 +5,44 @@ import { useAppContext } from '../../context/appContext'
 
 // this component allow us to add photo
 const AddFaceContainer = () => {
-    const { showAlert, isLoading, displayAlert , addFace} = useAppContext();
+    const { showAlert, isLoading, displayAlert, addFace } = useAppContext();
     const [singleFile, setSingleFile] = useState(''); // setting value of image uploaded from local computer
-    const fileHandler = (e) =>{
+    const fileHandler = (e) => {
+        // console.log(e.target.file[0])
         setSingleFile(e.target.files[0])
     }
     // sending request for saving image
     const handleSubmit = (e) => {
         e.preventDefault();
-        if( singleFile === ''){
+        if (singleFile === '') {
             displayAlert('Please Add File');
-            return ;
+            return;
         }
-    
+
         const reader = new FileReader();
         reader.readAsDataURL(singleFile) // read content of the file
-        reader.onloadend= () =>{
+        reader.onloadend = () => {
             addFace(reader.result); // calll the function present in appContext.js 
         }
         setSingleFile('');
     }
 
-   return ( <Wrapper>
+    return (<Wrapper>
         <form className='form'>
             <h4>Add Face</h4>
             {showAlert && <Alert />}
-            
+
             <div className='form-center'>
-               
+
                 <div className='form-row'>
                     <label className='form-label'>Add Face</label>
-                    <input type="file" className='form-input' onChange={fileHandler}/>
+                    <input type="file" className='form-input' onChange={fileHandler} />
                 </div>
-                
-                
+
+
                 <button
                     className='btn btn-block'
-                
+
                     onClick={handleSubmit}
                 >
                     AddFace
