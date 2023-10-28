@@ -6,11 +6,11 @@ import { useEffect } from "react"
 
 // if face is not recognized than this component will render 
 const Failure = () => {
-     const navigate = useNavigate();
-    const {clearValues, logoutUser} = useAppContext();
-    
+    const navigate = useNavigate();
+    const { clearValues, logoutUser } = useAppContext();
 
-    useEffect(()=> {
+
+    useEffect(() => {
         setTimeout(() => {
             clearValues();
             logoutUser();
@@ -26,7 +26,7 @@ const Failure = () => {
                     <h3>Transaction Unsuccessful</h3>
                     <p>Unknown FaceId Detected.</p>
                 </div>
-                
+
             </div>
 
         </Wrapper>
