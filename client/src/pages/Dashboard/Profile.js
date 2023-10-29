@@ -49,14 +49,14 @@ const Profile = () => {
           />
 
           <Input
-          labelText='upiId'
+            labelText='upiId'
             type='text'
             name='upiId'
             value={upiId}
             onChange={(e) => setUpiId(e.target.value)}
           />
-           <Input
-          labelText='number'
+          <Input
+            labelText='number'
             type='text'
             name='number'
             value={number}

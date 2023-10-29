@@ -192,7 +192,7 @@ const AppProvider = ({ children }) => {
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN })
     try {
-      const { data } = await authFetch.patch('http://localhost:4000/auth/updateUser', currentUser)
+      const { data } = await authFetch.patch('http://localhost:4000/api/v1/auth/updateUser', currentUser)
       const { user, token } = data;
       dispatch({ type: UPDATE_USER_SUCCESS, payload: { user, token } })
       addUserToLocalStorage({ user, token });

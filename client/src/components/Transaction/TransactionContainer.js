@@ -2,12 +2,13 @@ import moment from 'moment'
 import { useAppContext } from '../../context/appContext'
 import { FaCalendarAlt } from 'react-icons/fa'
 import Wrapper from '../../assets/wrappers/TransactionContainer'
-import {TransactionInfo}  from  './index'
+import { TransactionInfo } from './index'
 // component for designing transaction history card
 const TransactionContainer = (props) => {
     // npm package that convert date to any format you want
     let date = moment(props.createdAt)
     date = date.format('MMM Do, YYYY')
+    let transaction_id = props._id.slice(0, 16);
     return (
         // Props are coming from History page present in pages/dashboard folder
         <Wrapper>
@@ -21,13 +22,14 @@ const TransactionContainer = (props) => {
             <div className='content'>
                 <div className='content-center'>
                     {/* component for making UI better. This is coming from same folder */}
-                    <TransactionInfo icon='To:' text={props.payto} /> 
+                    <TransactionInfo icon='To:' text={props.payto} />
                     <TransactionInfo icon={<FaCalendarAlt />} text={date} />
                     <TransactionInfo icon='Acc No.' text={props.accountNo} />
+                    <TransactionInfo icon='ID:' text={transaction_id} />
                     <div className={`status ${props.paymentStatus}`}>{props.paymentStatus ? 'Success' : 'Cancelled'}</div>
                 </div>
             </div>
         </Wrapper>
     )
 }
- export default TransactionContainer
+export default TransactionContainer
