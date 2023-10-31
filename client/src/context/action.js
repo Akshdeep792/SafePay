@@ -44,6 +44,7 @@ export const VERIFICATION_SUCCESS = 'VERIFICATION_SUCCESS'
 export const SET_STATUS = 'SET_STATUS'
 
 export const REMOVE_FACE = 'REMOVE_FACE'
+export const SET_TYPE = 'SET_TYPE'
 
 
 

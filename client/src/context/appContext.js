@@ -31,6 +31,7 @@ import {
   VERIFICATION_BEGIN,
   VERIFICATION_SUCCESS,
   SET_STATUS,
+  SET_TYPE
 
 } from './action'
 
@@ -61,6 +62,7 @@ export const initialState = {
   totalTransaction: 0,
   face: '',
   paymentFace: '',
+  transaction_type: ''
 
 }
 
@@ -313,12 +315,16 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  const setType = (type) => {
+    dispatch({ type: SET_TYPE, payload: { type } })
+  }
+
   return (
     <AppContext.Provider
       value={{
         ...state, displayAlert, registerUser, loginUser, logoutUser, toggleSidebar, // exporting diffrent functions for their use
         modalToggle, addFace, handleChange, getUser, makeTransaction, clearValues,
-        updateUser, getTransaction, verifyImage, setStatus, sendErrorMail
+        updateUser, getTransaction, verifyImage, setStatus, sendErrorMail, setType
       }}
     >
       {children}

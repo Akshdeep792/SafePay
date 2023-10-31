@@ -1,16 +1,17 @@
 // importing icons from react icons
 import { IoBarChartSharp } from 'react-icons/io5'
-import {  MdTagFaces} from 'react-icons/md'
+import { MdTagFaces } from 'react-icons/md'
 import { FaHistory } from 'react-icons/fa'
 import { ImProfile } from 'react-icons/im'
+import { AiFillHome } from 'react-icons/ai'
 
 // these are navbar links that help us to identify and reach diffrent pages
 const links = [
   {
     id: 1,
-    text: 'stats',
+    text: 'home',
     path: '/',
-    icon: <IoBarChartSharp />,
+    icon: <AiFillHome />,
   },
   {
     id: 2,

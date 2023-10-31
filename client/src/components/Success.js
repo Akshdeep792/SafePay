@@ -4,18 +4,19 @@ import success from '../assets/images/success.png'
 import { useNavigate } from "react-router-dom"
 // this component will render when face is recognized. It is done in ../pages/status
 const Success = () => {
-     const navigate = useNavigate();
-    const {payto, accountNo, amount, setStatus, clearValues, logoutUser} = useAppContext();
-    
+    const navigate = useNavigate();
+    const { payto, accountNo, amount, setStatus, clearValues, logoutUser, transaction_type } = useAppContext();
+
     const logOutHandler = () => {
         logoutUser();
         navigate('/landing')
     }
- 
+
     const onClickHandler = () => {
-            navigate('/');
-            clearValues();
+        navigate('/');
+        clearValues();
     }
+    const txt = transaction_type === 'mobile' ? "Mobile No" : "accountNo";
     return (
         // success page design
         <Wrapper className='full-page'>
@@ -23,7 +24,7 @@ const Success = () => {
                 <img src={success} alt='Done' />
                 <div className="info">
                     <h3>Transaction Successfull</h3>
-                    <p>{amount} has been transfered from your bank account to {payto} having account number {accountNo}</p>
+                    <p>{amount} has been transfered from your bank account to {payto} {txt} {accountNo}</p>
                 </div>
                 <button className="btn btn-block" onClick={logOutHandler}>LogOut</button>
                 <button className="btn member-btn" onClick={onClickHandler}>Back To HomePage</button>

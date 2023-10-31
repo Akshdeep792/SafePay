@@ -9,6 +9,7 @@ const TransactionContainer = (props) => {
     let date = moment(props.createdAt)
     date = date.format('MMM Do, YYYY')
     let transaction_id = props._id.slice(0, 16);
+    const num = props.accountNo.toString().length === 10 ? "Ph No." : "Acc No."
     return (
         // Props are coming from History page present in pages/dashboard folder
         <Wrapper>
@@ -24,7 +25,7 @@ const TransactionContainer = (props) => {
                     {/* component for making UI better. This is coming from same folder */}
                     <TransactionInfo icon='To:' text={props.payto} />
                     <TransactionInfo icon={<FaCalendarAlt />} text={date} />
-                    <TransactionInfo icon='Acc No.' text={props.accountNo} />
+                    <TransactionInfo icon={num} text={props.accountNo} />
                     <TransactionInfo icon='ID:' text={transaction_id} />
                     <div className={`status ${props.paymentStatus}`}>{props.paymentStatus ? 'Success' : 'Cancelled'}</div>
                 </div>

@@ -25,10 +25,11 @@ import {
   VERIFICATION_BEGIN,
   VERIFICATION_SUCCESS,
   SET_STATUS,
+  SET_TYPE
 
-  
+
 } from "./action"
-import {initialState} from "./appContext"
+import { initialState } from "./appContext"
 
 
 //setting state variables according to requirements
@@ -99,17 +100,18 @@ const reducer = (state, action) => {
       alertText: action.payload.msg,
     }
   }
-  if (action.type === TOGGLE_SIDEBAR){
-    return {...state, showSidebar : !state.showSidebar}
+  if (action.type === TOGGLE_SIDEBAR) {
+    return { ...state, showSidebar: !state.showSidebar }
   }
-  if (action.type === TOGGLE_MODAL){
-    return {...state, showModal : !state.showModal}
+  if (action.type === TOGGLE_MODAL) {
+    return { ...state, showModal: !state.showModal }
   }
 
-  if(action.type === LOGOUT_USER){
-    return {...initialState,
-      user : null,
-      token : null,
+  if (action.type === LOGOUT_USER) {
+    return {
+      ...initialState,
+      user: null,
+      token: null,
       userLocation: '',
       jobLocation: '',
     }
@@ -139,12 +141,13 @@ const reducer = (state, action) => {
     }
   }
   if (action.type === ADD_IMAGE_BEGIN) {
-    return { ...state, 
+    return {
+      ...state,
       isLoading: true,
       showAlert: true,
       alertType: 'success',
       alertText: 'Adding Face Please Wait'
-     }
+    }
   }
   if (action.type === ADD_IMAGE_SUCCESS) {
     return {
@@ -165,10 +168,10 @@ const reducer = (state, action) => {
       alertText: action.payload.msg,
     }
   }
-  if(action.type === HANDLE_CHANGE){
+  if (action.type === HANDLE_CHANGE) {
     return {
       ...state,
-      [action.payload.name] : action.payload.value
+      [action.payload.name]: action.payload.value
     }
   }
   if (action.type === CLEAR_VALUES) {
@@ -176,12 +179,13 @@ const reducer = (state, action) => {
       payto: '',
       accountNo: 0,
       upiId: '',
-      amount: 0, 
+      amount: 0,
+      payment_type: ''
     }
     return { ...state, ...initialState }
-    
+
   }
-  if(action.type === GET_USER_BEGIN){
+  if (action.type === GET_USER_BEGIN) {
     return {
       ...state,
       isLoading: true,
@@ -189,15 +193,15 @@ const reducer = (state, action) => {
     }
   }
 
-  if(action.type === GET_USER_SUCCESS){
+  if (action.type === GET_USER_SUCCESS) {
     return {
       ...state,
-      isLoading : false,
+      isLoading: false,
       users: action.payload.users,
-      imageId : action.payload.imageId
+      imageId: action.payload.imageId
     }
   }
-  if(action.type === GET_TRANSACTION_BEGIN){
+  if (action.type === GET_TRANSACTION_BEGIN) {
     return {
       ...state,
       isLoading: true,
@@ -205,45 +209,52 @@ const reducer = (state, action) => {
     }
   }
 
-  if(action.type === GET_TRANSACTION_SUCCESS){
+  if (action.type === GET_TRANSACTION_SUCCESS) {
     return {
       ...state,
-      isLoading : false,
+      isLoading: false,
       transactions: action.payload.transactions,
-      totalTransaction : action.payload.totalTransaction
+      totalTransaction: action.payload.totalTransaction
     }
   }
-  if(action.type === VERIFICATION_BEGIN){
+  if (action.type === VERIFICATION_BEGIN) {
     return {
       ...state,
       isLoading: true,
       showAlert: true,
-      alertType : 'success',
-      alertText : 'Verifying User Please Wait....'
+      alertType: 'success',
+      alertText: 'Verifying User Please Wait....'
     }
   }
 
-  if(action.type === VERIFICATION_SUCCESS){
+  if (action.type === VERIFICATION_SUCCESS) {
     return {
       ...state,
-      isLoading : false,
+      isLoading: false,
       showAlert: false,
-      paymentStatus : action.payload.status,
-      face : action.payload.face,
-      paymentFace : action.payload.paymentFace
+      paymentStatus: action.payload.status,
+      face: action.payload.face,
+      paymentFace: action.payload.paymentFace
     }
   }
-  if(action.type === SET_STATUS){
+  if (action.type === SET_STATUS) {
     return {
       ...state,
       face: '',
-      paymentStatus : null,
+      paymentStatus: null,
       paymentFace: '',
       file: '',
       alertText: '',
       alertType: ''
     }
   }
- 
+  if (action.type === SET_TYPE) {
+    return {
+      ...state,
+      transaction_type: action.payload.type
+    }
+
+  }
+
 }
 export default reducer
