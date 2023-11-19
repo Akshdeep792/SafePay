@@ -6,15 +6,20 @@ import { Balance, Message } from "../../components/UI";
 import { AiFillBank } from "react-icons/ai";
 import { RiContactsBookFill } from "react-icons/ri"
 import { MdAccountBalanceWallet } from "react-icons/md"
+import { useState } from "react";
 
 const Dashboard = () => {
     const navigate = useNavigate();
+    const [balance, setBalance] = useState(false);
     const { getUser, users, setStatus, imageId, setType } = useAppContext();
 
     useEffect(() => {
         getUser(); // for getting user photo from cloudinary for checking weather photo is uploaded or not
     }, [])
 
+    const showBalance = () => {
+        setBalance(!balance)
+    }
     const onClickHandler = (type) => {
         setStatus();
         setType(type)
@@ -26,9 +31,7 @@ const Dashboard = () => {
     return (
         <Wrapper >
             {/* This is for balance check. This is not dynamic for now */}
-            {/* <div className="balance">
-                <Balance />
-            </div> */}
+
 
             {/* If user did not uploaded his/her photo */}
             {!status && <Message>Please add Photo For Transaction</Message>}
@@ -45,9 +48,10 @@ const Dashboard = () => {
                     <h2 className="icons"><RiContactsBookFill /></h2>
                     <p className="info">To Bank A/C</p>
                 </div>
-                <div className="sub-cards">
+                <div className="sub-cards" onClick={showBalance}>
                     <h2 className="icons"><MdAccountBalanceWallet /></h2>
-                    <p className="info">Balance</p>
+                    {!balance && <p className="info">Balance</p>}
+                    {balance && <p className="info">Rs 4892843</p>}
 
                 </div>
             </div>}
