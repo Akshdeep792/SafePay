@@ -306,6 +306,7 @@ const AppProvider = ({ children }) => {
   const sendErrorMail = async () => {
     try {
       const { paymentFace, user } = state
+      console.log(paymentFace)
       await authFetch.post('/errormail/sendmail', {
         to: user.email, // email of user
         paymentFace // current face 

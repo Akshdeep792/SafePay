@@ -8,6 +8,7 @@ const sendMail = async (req, res) => {
     // console.log('Send Mail')
 
     // for setting the sender
+    // console.log("Working")
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -15,8 +16,8 @@ const sendMail = async (req, res) => {
             pass: process.env.SAFEPAY_PASSWORD
         }
     });
-
-
+    // console.log(transporter);
+    console.log(req.body.to)
     // this will set info that has to sent to user
     var mailOptions = {
         from: 'safepay404@gmail.com',// sender address
@@ -35,12 +36,13 @@ const sendMail = async (req, res) => {
             cid: 'unique@nodemailer.com' //same cid value as in the html img src
         }]
     };
-
+    // console.log(mailOptions)
     // this will send mail
     transporter.sendMail(mailOptions, (error, info) => {
         if (!error) {
             res.status(StatusCodes.OK).json({ msg: "Mail Sent" })
         }
+        console.log(error.message)
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: 'Something went wrong' })
 
     });
