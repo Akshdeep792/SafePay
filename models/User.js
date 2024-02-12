@@ -3,49 +3,53 @@ import validator from 'validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 const UserSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : [true, 'Please provide name'],
-        minlength : 3,
-        maxlength:20,
+    name: {
+        type: String,
+        required: [true, 'Please provide name'],
+        minlength: 3,
+        maxlength: 20,
         trim: true
     },
-    email : {
-        type : String,
-        required : [true, 'Please provide email'],
-        unique : true,
-        validate : {
-            validator : validator.isEmail,
-            message : 'Please provide valid email'
+    email: {
+        type: String,
+        required: [true, 'Please provide email'],
+        unique: true,
+        validate: {
+            validator: validator.isEmail,
+            message: 'Please provide valid email'
         }
     },
-    password :  {
-        type : String,
-        required : [true, 'Please provide email'],
-        unique : true,
-        minlength : 6,
-    },
-    lastName : {
+    password: {
         type: String,
-        trim : true,
-        maxlength : 20,
-        default : 'lastName'
+        required: [true, 'Please provide email'],
+        unique: true,
+        minlength: 6,
     },
-    number : {
+    lastName: {
+        type: String,
+        trim: true,
+        maxlength: 20,
+        default: 'lastName'
+    },
+    number: {
         type: String,
         default: '999999999'
 
     },
-    upiId : {
+    upiId: {
         type: String,
-        default : 'user@upi'
+        default: 'user@upi'
+    },
+    balance: {
+        type: String,
+        default: '1000000'
     }
 
 })
 
 // bcrypt method for saving hashed password
-UserSchema.pre('save', async function(){
-    if(!this.isModified('password')){
+UserSchema.pre('save', async function () {
+    if (!this.isModified('password')) {
         return;
     }
     const salt = await bcrypt.genSalt(10);
@@ -53,14 +57,14 @@ UserSchema.pre('save', async function(){
 })
 
 // creating token
-UserSchema.methods.createJWT = function(){
+UserSchema.methods.createJWT = function () {
     // console.log(this);
-    return jwt.sign({userId: this._id}, process.env.JWT_SECRET, {expiresIn : process.env.JWT_LIFETIME})
+    return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME })
 }
 
 // compare entered password and hashed password
-UserSchema.methods.comparePassword = async function(candidatePassword){
-    const isMatch = await bcrypt.compare(candidatePassword,this.password);
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);
     return isMatch
 }
 

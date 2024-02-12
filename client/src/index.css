@@ -152,6 +152,7 @@ ul {
   display:flex;
   justify-content:center;
   align-items: center; 
+  
 }
 .logo-main .img{
   /* color: var(--purple-dark); */
@@ -165,6 +166,11 @@ ul {
   font-weight : 900;
   font-size: 1.5rem;
   letter-spacing: 2px;
+}
+@media (max-width: 450px) {
+  .logodiv {
+    /* width: 50%; */
+  }
 }
 
 .img {

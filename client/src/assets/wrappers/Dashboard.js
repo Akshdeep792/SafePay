@@ -18,12 +18,16 @@ const Wrapper = styled.main`
   border-radius: var(--borderRadius);
 }
 .cards {
-  display: grid; 
+  /* display: grid; 
   grid-template-columns: 1fr 1fr 1fr; 
   grid-template-rows: 1fr; 
   gap: 0px 4px; 
   grid-template-areas: 
-    ". . ."; 
+    ". . .";  */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 .sub-cards {
   /* flex: 1; */
@@ -38,6 +42,7 @@ const Wrapper = styled.main`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
   flex-direction: column;
   cursor: pointer;
+  margin: 4px 0;
 }
 .sub-cards:hover {
   transform: scale(1.1);

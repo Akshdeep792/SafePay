@@ -25,7 +25,9 @@ const register = async (req, res) => {
             lastName: user.lastName,
             name: user.name,
             number: user.number,
-            upiId: user.upiId
+            upiId: user.upiId,
+            balance: user.balance
+
         }, token
     });
 }

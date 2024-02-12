@@ -290,6 +290,7 @@ const AppProvider = ({ children }) => {
     try {
       const response = await axios.post('http://127.0.0.1:5001/api/verify', { data: imageSrc, known: knownUrl })
       if (response.data === 'User') {
+
         dispatch({ type: VERIFICATION_SUCCESS, payload: { status: true, face: response.data, paymentFace: imageSrc } })
 
       }

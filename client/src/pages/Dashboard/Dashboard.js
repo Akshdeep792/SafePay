@@ -11,7 +11,7 @@ import { useState } from "react";
 const Dashboard = () => {
     const navigate = useNavigate();
     const [balance, setBalance] = useState(false);
-    const { getUser, users, setStatus, imageId, setType } = useAppContext();
+    const { getUser, users, setStatus, imageId, setType, user } = useAppContext();
 
     useEffect(() => {
         getUser(); // for getting user photo from cloudinary for checking weather photo is uploaded or not
@@ -51,7 +51,7 @@ const Dashboard = () => {
                 <div className="sub-cards" onClick={showBalance}>
                     <h2 className="icons"><MdAccountBalanceWallet /></h2>
                     {!balance && <p className="info">Balance</p>}
-                    {balance && <p className="info">Rs 4892843</p>}
+                    {balance && <p className="info">Rs. {user.balance}</p>}
 
                 </div>
             </div>}
