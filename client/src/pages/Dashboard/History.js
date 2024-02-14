@@ -21,14 +21,15 @@ const History = () => {
             </Wrapper>
         )
     }
+
     return (
-        <Wrapper>      
-             <div className='transaction'>
-                 {/* showing transactions done so far */}
-            {transactions.map((trans) => {
-                return <TransactionContainer key={trans._id} {...trans} /> // constainer that contains transaction details
-            })}
-        </div>
+        <Wrapper>
+            <div className='transaction'>
+                {/* showing transactions done so far */}
+                {transactions.map((trans) => {
+                    return <TransactionContainer key={trans._id} {...trans} /> // constainer that contains transaction details
+                })}
+            </div>
         </Wrapper>
 
     )

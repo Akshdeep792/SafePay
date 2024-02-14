@@ -30,14 +30,10 @@ const Dashboard = () => {
 
     return (
         <Wrapper >
-            {/* This is for balance check. This is not dynamic for now */}
-
 
             {/* If user did not uploaded his/her photo */}
             {!status && <Message>Please add Photo For Transaction</Message>}
-            {/* <button className='btn btn-block' onClick={onClickHandler} disabled={!status}>
-                Make Transaction
-            </button> */}
+
             <h5 className="sub-sec">Money Transfer</h5>
             {status && <div className="cards">
                 <div className="sub-cards" onClick={() => onClickHandler("mobile")}>

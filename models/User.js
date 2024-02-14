@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
     },
     number: {
         type: String,
-        default: '999999999'
+        default: '9999999999'
 
     },
     upiId: {

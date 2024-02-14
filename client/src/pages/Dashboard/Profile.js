@@ -56,7 +56,7 @@ const Profile = () => {
             onChange={(e) => setUpiId(e.target.value)}
           />
           <Input
-            labelText='number'
+            labelText='Acc Number'
             type='text'
             name='number'
             value={number}

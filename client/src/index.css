@@ -168,8 +168,9 @@ ul {
   letter-spacing: 2px;
 }
 @media (max-width: 450px) {
-  .logodiv {
+  .logoname {
     /* width: 50%; */
+    display: none;
   }
 }
 
@@ -331,6 +332,7 @@ ul {
   width: var(--fluid-width);
   max-width: var(--max-width);
   margin: 0 auto;
+  align-items: center;
 }
 .full-page {
   min-height: 100vh;

@@ -26,15 +26,16 @@ const Wrapper = styled.main`
     ". . .";  */
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 .sub-cards {
   /* flex: 1; */
   /* border: 1px solid black; */
-  width: 320px;
-  height: 400px;
+  width: 300px;
+  height: 350px;
   display: flex;
+  /* flex: 1; */
   align-items: center;
   justify-content: center;
   border-radius: var(--borderRadius);
@@ -56,6 +57,13 @@ const Wrapper = styled.main`
   font-size: 1.5rem;
   color: var(--purple-500);
 
+}
+@media (max-width: 690px) {
+  .cards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
   @media (min-width: 992px) {

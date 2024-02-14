@@ -75,6 +75,7 @@ const Wrapper = styled.nav`
     }
     .logo {
       display: none;
+      /* opacity: 0; */
     }
     .logo-text {
       display: block;

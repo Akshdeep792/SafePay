@@ -129,11 +129,11 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem('user')
 
   }
-  //for handling change in our form
+  //for handling changes in our form
   const handleChange = ({ name, value }) => {
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } })
   }
-  // these are diffrent functions that to diffrent works according to there name
+  // these are diffrent functions that perform diffrent function according to there name
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR })
   }
@@ -144,7 +144,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: LOGOUT_USER })
     removeUserFromLocalStorage();
   }
-  // set payment status after being verified
+  // set payment status after being verified whether success or not
   const setStatus = () => {
     dispatch({ type: SET_STATUS })
   }
@@ -230,7 +230,7 @@ const AppProvider = ({ children }) => {
       })
     }
   }
-  // getting face from cloudinary
+  // getting face/image from cloudinary
   const getUser = async () => {
     dispatch({ type: GET_USER_BEGIN })
     try {
@@ -274,7 +274,8 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_TRANSACTION_BEGIN });
     try {
       const { data } = await authFetch('/trans/history');
-      const { transactions, totalTransaction } = data;
+      let { transactions, totalTransaction } = data;
+      transactions = transactions.reverse()
       dispatch({
         type: GET_TRANSACTION_SUCCESS,
         payload: { transactions, totalTransaction }
